@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-        <AssemblyName>Dew.Shared</AssemblyName>
-        <RootNamespace>Dew.Shared</RootNamespace>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Dew.Shared</AssemblyName>
+    <RootNamespace>Dew.Shared</RootNamespace>
+  </PropertyGroup>
 
 </Project>
