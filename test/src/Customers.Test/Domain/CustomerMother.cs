@@ -31,4 +31,17 @@ public static class CustomerMother
             faker.Person.Email
         );
     }
+
+    public static CreateCustomerCommand ValidCommand()
+    {
+        var faker = new Faker();
+
+        return new CreateCustomerCommand(
+            faker.Random.AlphaNumeric(10),
+            faker.Person.FirstName,
+            faker.Person.LastName,
+            "123456789",
+            faker.Person.Email
+        );
+    }
 }
