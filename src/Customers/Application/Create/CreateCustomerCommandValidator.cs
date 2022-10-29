@@ -23,7 +23,7 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
             .MaximumLength(100);
 
         RuleFor(x => x.PhoneNumber)
-            .MaximumLength(10)
+            .MaximumLength(15)
             .Matches(@"^[0-9]+$")
             .WithMessage("Phone number must be numeric")
             .When(x => !string.IsNullOrEmpty(x.PhoneNumber));
