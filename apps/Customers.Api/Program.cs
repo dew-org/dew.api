@@ -25,6 +25,8 @@ app.MapControllers();
 
 app.MapCustomerEndpoints();
 
+app.UseCors(Infrastructure.CorsPolicy);
+
 app.Run();
 
 #pragma warning disable CA1050 // Declare types in namespaces
