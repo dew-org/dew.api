@@ -35,4 +35,34 @@ public class CustomersEndpointTest : ApplicationContextTestCase
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
+
+    [Fact]
+    public async Task WhenGetAnExistingCustomer_ThenReturnOk()
+    {
+        // Arrange
+        var command = CustomerMother.ValidCommand();
+        var createResponse = await Client.PostAsJsonAsync("/customers", command);
+        createResponse.EnsureSuccessStatusCode();
+
+        var customerId = command.Id;
+
+        // Act
+        var response = await Client.GetAsync($"/customers/{customerId}");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+
+    [Fact]
+    public async Task WhenGetANonExistingCustomer_ThenReturnNotFound()
+    {
+        // Arrange
+        var customerId = Guid.NewGuid();
+
+        // Act
+        var response = await Client.GetAsync($"/customers/{customerId}");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }

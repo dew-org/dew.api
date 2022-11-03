@@ -1,4 +1,5 @@
 ﻿using Dew.Customers.Application.Create;
+using Dew.Customers.Application.Find;
 using Dew.Shared.Infrastructure.Bus;
 using MediatR;
 
@@ -9,6 +10,7 @@ public static class Application
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<CustomerCreator>();
+        services.AddScoped<CustomerFinder>();
 
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
