@@ -40,7 +40,7 @@ public static class CustomerMother
             faker.Random.AlphaNumeric(10),
             faker.Person.FirstName,
             faker.Person.LastName,
-            "123456789",
+            string.Join("", Enumerable.Range(0, 10).Select(x => faker.Random.Number(0, 9))),
             faker.Person.Email
         );
     }
