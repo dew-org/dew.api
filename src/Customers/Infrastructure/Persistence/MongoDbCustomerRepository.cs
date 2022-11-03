@@ -14,4 +14,7 @@ public class MongoDbCustomerRepository : ICustomerRepository
     }
 
     public async Task Save(Customer customer) => await _collection.InsertOneAsync(customer);
+
+    public async Task<Customer?> Find(string? id) =>
+        await _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
 }
