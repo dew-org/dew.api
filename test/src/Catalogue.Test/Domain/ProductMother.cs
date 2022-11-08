@@ -2,7 +2,7 @@
 using Dew.Catalogue.Application.Create;
 using Dew.Catalogue.Domain;
 
-namespace Catalogue.Test.Domain;
+namespace Dew.Catalogue.Test.Domain;
 
 public static class ProductMother
 {
@@ -22,6 +22,7 @@ public static class ProductMother
             .RuleFor(x => x.Discount, f => f.Random.Float())
             .RuleFor(x => x.Tax, f => f.Random.Float())
             .RuleFor(x => x.Price, f => priceFaker.Generate())
+            .RuleFor(x => x.CreatedAt, f => f.Date.Past())
             .RuleFor(x => x.UserId, f => f.Random.Guid().ToString());
 
         return faker.Generate();

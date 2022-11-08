@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Catalogue.Test.Domain;
+using Dew.Catalogue.Test.Domain;
 
 namespace Dew.Catalogue.Api.Test.Endpoints;
 

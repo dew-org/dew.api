@@ -6,6 +6,9 @@ namespace Dew.Catalogue.Infrastructure.Persistence;
 
 public class MongoDbCatalogueRepository : ICatalogueRepository
 {
+    private static readonly SortDefinition<Product> SortByCreationDate =
+        Builders<Product>.Sort.Descending(p => p.CreatedAt);
+
     private readonly IMongoCollection<Product> _collection;
 
     public MongoDbCatalogueRepository(IMongoCollectionBuilder collectionBuilder)
@@ -14,4 +17,11 @@ public class MongoDbCatalogueRepository : ICatalogueRepository
     }
 
     public async Task Save(Product product) => await _collection.InsertOneAsync(product);
+
+    public async Task<IEnumerable<Product>> SearchAll(int page, int pageSize) =>
+        await _collection.Find(_ => true)
+            .Sort(SortByCreationDate)
+            .Skip(page * pageSize)
+            .Limit(pageSize)
+            .ToListAsync();
 }

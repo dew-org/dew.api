@@ -1,8 +1,8 @@
-﻿using Catalogue.Test.Domain;
-using Dew.Catalogue.Application.Create;
+﻿using Dew.Catalogue.Application.Create;
 using Dew.Catalogue.Domain;
+using Dew.Catalogue.Test.Domain;
 
-namespace Catalogue.Test.Application.Create;
+namespace Dew.Catalogue.Test.Application.Create;
 
 public class CreateProductCommandHandlerTest
 {
