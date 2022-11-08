@@ -1,4 +1,5 @@
 ﻿using Dew.Catalogue.Application.Create;
+using Dew.Catalogue.Application.SearchAll;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dew.Catalogue.Api.Endpoints;
@@ -8,9 +9,10 @@ public static class CatalogueApi
     public static void MapCatalogueApi(this WebApplication app)
     {
         app.MapPost("/catalogue", HandlePostProduct);
+        app.MapGet("/catalogue", HandleGetAllProducts);
     }
 
-    private static async Task<IResult> HandlePostProduct([FromServices] IMediator mediator,
+    private static async Task<IResult> HandlePostProduct([FromServices] ISender mediator,
         [FromBody] CreateProductCommand command)
     {
         try
@@ -29,5 +31,11 @@ public static class CatalogueApi
         }
 
         return Results.Ok();
+    }
+
+    private static async Task<IResult> HandleGetAllProducts([FromServices] ISender mediator, int page, int pageSize)
+    {
+        var products = await mediator.Send(new SearchAllProductsQuery(page, pageSize));
+        return Results.Ok(products);
     }
 }
