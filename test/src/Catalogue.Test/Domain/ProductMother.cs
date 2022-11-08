@@ -45,4 +45,23 @@ public static class ProductMother
             faker.Random.Guid().ToString()
         );
     }
+
+    public static CreateProductCommand InvalidCommand()
+    {
+        var faker = new Faker();
+
+        return new CreateProductCommand(
+            faker.Random.AlphaNumeric(20),
+            string.Empty,
+            faker.Commerce.ProductDescription(),
+            new CreateProductPrice(
+                faker.Random.Decimal(1, 100),
+                faker.Random.Decimal(-1, -100),
+                faker.Finance.Currency().Code
+            ),
+            faker.Random.Float(),
+            faker.Random.Float(),
+            faker.Random.Guid().ToString()
+        );
+    }
 }

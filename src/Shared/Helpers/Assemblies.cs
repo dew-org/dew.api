@@ -3,4 +3,5 @@
 public static class Assemblies
 {
     public static string Customers => "Dew.Customers";
+    public static string Catalogue => "Dew.Catalogue";
 }
