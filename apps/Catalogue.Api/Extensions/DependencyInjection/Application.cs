@@ -1,4 +1,5 @@
 ﻿using Dew.Catalogue.Application.Create;
+using Dew.Catalogue.Application.Find;
 using Dew.Catalogue.Application.SearchAll;
 using Dew.Shared.Infrastructure.Bus;
 
@@ -10,6 +11,7 @@ public static class Application
     {
         services.AddScoped<ProductCreator>();
         services.AddScoped<ProductsSearcher>();
+        services.AddScoped<ProductFinder>();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 

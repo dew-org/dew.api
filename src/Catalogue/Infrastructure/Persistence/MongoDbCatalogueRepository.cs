@@ -24,4 +24,7 @@ public class MongoDbCatalogueRepository : ICatalogueRepository
             .Skip(page * pageSize)
             .Limit(pageSize)
             .ToListAsync();
+
+    public async Task<Product?> Find(string code) =>
+        await _collection.Find(p => p.Code == code).FirstOrDefaultAsync();
 }

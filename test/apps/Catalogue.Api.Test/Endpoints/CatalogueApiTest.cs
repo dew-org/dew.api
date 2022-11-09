@@ -61,4 +61,38 @@ public class CatalogueApiTest : ApplicationContextTestCase
         products.Should().NotBeNull();
         products.Should().HaveCount(10);
     }
+    
+    [Fact]
+    public async Task WhenGetAnExistingProduct_ThenReturnProduct()
+    {
+        // Arrange
+        var command = ProductMother.RandomCommand();
+        var response = await Client.PostAsJsonAsync("/catalogue", command);
+        response.EnsureSuccessStatusCode();
+
+        // Act
+        response = await Client.GetAsync($"/catalogue/{command.Code}");
+        
+        // Assert
+        response.EnsureSuccessStatusCode();
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        
+        var productResponse = await response.Content.ReadFromJsonAsync<ProductResponse>();
+        
+        productResponse.Should().NotBeNull();
+        productResponse!.Code.Should().Be(command.Code);
+    }
+    
+    [Fact]
+    public async Task WhenGetANonExistingProduct_ThenReturnNotFound()
+    {
+        // Arrange
+        var command = ProductMother.RandomCommand();
+
+        // Act
+        var response = await Client.GetAsync($"/catalogue/{command.Code}");
+        
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
 }
