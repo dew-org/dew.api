@@ -2,7 +2,7 @@
 
 namespace Dew.Customers.Application.Create;
 
-public class CreateCustomerCommandHandler : CommandHandler<CreateCustomerCommand>
+public sealed class CreateCustomerCommandHandler : CommandHandler<CreateCustomerCommand>
 {
     private readonly CustomerCreator _creator;
 

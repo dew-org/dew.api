@@ -3,7 +3,7 @@ using Mapster;
 
 namespace Dew.Customers.Application.Create;
 
-public class CustomerCreator
+public sealed class CustomerCreator
 {
     private readonly ICustomerRepository _repository;
 

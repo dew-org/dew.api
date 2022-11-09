@@ -2,7 +2,7 @@
 
 namespace Dew.Catalogue.Application.Create;
 
-public class CreateProductCommandHandler : CommandHandler<CreateProductCommand>
+public sealed class CreateProductCommandHandler : CommandHandler<CreateProductCommand>
 {
     private readonly ProductCreator _creator;
 

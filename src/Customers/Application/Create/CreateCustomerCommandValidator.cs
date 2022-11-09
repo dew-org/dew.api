@@ -2,7 +2,7 @@
 
 namespace Dew.Customers.Application.Create;
 
-public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
+public sealed class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
 {
     public CreateCustomerCommandValidator()
     {

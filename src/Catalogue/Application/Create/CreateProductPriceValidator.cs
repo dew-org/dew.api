@@ -2,7 +2,7 @@
 
 namespace Dew.Catalogue.Application.Create;
 
-public class CreateProductPriceValidator : AbstractValidator<CreateProductPrice>
+public sealed class CreateProductPriceValidator : AbstractValidator<CreateProductPrice>
 {
     public CreateProductPriceValidator()
     {
