@@ -14,4 +14,7 @@ public class MongoDbShopRepository : IShopRepository
     }
 
     public async Task Save(Shop shop) => await _collection.InsertOneAsync(shop);
+
+    public async Task<Shop?> FindByUser(string userId) =>
+        await _collection.Find(x => x.UserId == userId).FirstOrDefaultAsync();
 }
