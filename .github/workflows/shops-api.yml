@@ -1,0 +1,54 @@
+﻿name: shops-api
+
+on:
+  push:
+    branches: [ 'main' ]
+    tags: [ 'v*.*.*' ]
+    
+    paths:
+      - 'src/Shops/**'
+      - 'apps/Shops.Api/**'
+      - '.github/workflows/shops-api.yml'
+
+env:
+  REGISTRY: docker.io
+  IMAGE_NAME: deworg/shops
+
+jobs:
+  publish-docker-image:
+    
+    if: github.event_name == 'release'
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+
+      - name: build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: apps/Shops.Api/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
