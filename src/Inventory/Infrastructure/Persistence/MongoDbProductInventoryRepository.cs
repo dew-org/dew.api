@@ -15,4 +15,7 @@ public class MongoDbProductInventoryRepository : IProductInventoryRepository
 
 
     public async Task Save(ProductInventory productInventory) => await _collection.InsertOneAsync(productInventory);
+
+    public async Task<ProductInventory?> Find(string codeOrSku) =>
+        await _collection.Find(x => x.Code == codeOrSku || x.Sku == codeOrSku).FirstOrDefaultAsync();
 }
