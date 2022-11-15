@@ -3,4 +3,6 @@
 public interface IProductInventoryRepository
 {
     Task Save(ProductInventory productInventory);
+
+    Task<ProductInventory?> Find(string codeOrSku);
 }
