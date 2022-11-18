@@ -18,4 +18,13 @@ public class MongoDbProductInventoryRepository : IProductInventoryRepository
 
     public async Task<ProductInventory?> Find(string codeOrSku) =>
         await _collection.Find(x => x.Code == codeOrSku || x.Sku == codeOrSku).FirstOrDefaultAsync();
+
+    public async Task<ProductInventory?> UpdateStock(string sku, uint newStock) =>
+        await _collection.FindOneAndUpdateAsync<ProductInventory>(
+            x => x.Sku == sku,
+            Builders<ProductInventory>.Update.Set(x => x.Stock, newStock),
+            new FindOneAndUpdateOptions<ProductInventory>
+            {
+                ReturnDocument = ReturnDocument.After
+            });
 }
