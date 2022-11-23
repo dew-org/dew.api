@@ -14,6 +14,13 @@ public sealed class CreateInvoiceCommandValidator : AbstractValidator<CreateInvo
             .NotEmpty()
             .MaximumLength(100);
 
+        RuleFor(x => x.Currency)
+            .NotEmpty()
+            .MaximumLength(5);
+
+        RuleFor(x => x.UserId)
+            .NotEmpty();
+
         RuleFor(x => x.Items)
             .NotEmpty();
 

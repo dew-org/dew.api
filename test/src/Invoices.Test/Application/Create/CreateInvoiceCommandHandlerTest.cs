@@ -25,11 +25,12 @@ public class CreateInvoiceCommandHandlerTest
     {
         // Arrange
         var command = InvoiceMother.RandomCommand();
-        
+
         // Act
         await _handler.Handle(command, CancellationToken.None);
-        
+
         // Assert
         _invoice.Should().NotBeNull();
+        _invoice!.Total.Should().BeGreaterOrEqualTo(0);
     }
 }

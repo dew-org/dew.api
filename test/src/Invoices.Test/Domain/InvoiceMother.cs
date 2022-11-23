@@ -36,13 +36,15 @@ public static class InvoiceMother
 
         return new CreateInvoiceCommand(
             new CreateInvoiceCustomer(faker.Random.AlphaNumeric(10), faker.Person.FullName),
+            faker.Finance.Currency().Code,
+            Guid.NewGuid().ToString(),
             Enumerable.Range(1, 10).Select(_ => new CreateInvoiceItem(
                 new CreateInvoiceItemProduct(faker.Commerce.Product(), faker.Commerce.ProductName()),
                 faker.Random.Int(1, 10),
                 faker.Random.Decimal(1, 1000),
                 faker.Random.Decimal(),
                 faker.Random.Decimal()
-            ))
+            )).ToList()
         );
     }
 
@@ -52,13 +54,15 @@ public static class InvoiceMother
 
         return new CreateInvoiceCommand(
             new CreateInvoiceCustomer(string.Empty, string.Empty),
+            faker.Finance.Currency().Code,
+            Guid.NewGuid().ToString(),
             Enumerable.Range(1, 10).Select(_ => new CreateInvoiceItem(
                 new CreateInvoiceItemProduct(faker.Commerce.Product(), faker.Commerce.ProductName()),
                 0,
                 faker.Random.Decimal(1, 1000),
                 faker.Random.Decimal(),
                 faker.Random.Decimal()
-            ))
+            )).ToList()
         );
     }
 }

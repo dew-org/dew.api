@@ -13,7 +13,7 @@ public class Invoice
     public string Currency { get; set; } = default!;
     public string UserId { get; set; }
 
-    public IEnumerable<InvoiceItem> Items { get; } = new HashSet<InvoiceItem>();
+    public IEnumerable<InvoiceItem> Items { get; set; } = new List<InvoiceItem>();
 
     public decimal SubTotal { get; private set; }
     public decimal Discount { get; private set; }

@@ -4,6 +4,8 @@ namespace Dew.Invoices.Application.Create;
 
 public sealed record CreateInvoiceCommand(
     CreateInvoiceCustomer Customer,
+    string Currency,
+    string UserId,
     IEnumerable<CreateInvoiceItem> Items
 ) : Command;
 

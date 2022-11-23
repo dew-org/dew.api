@@ -14,6 +14,8 @@ public sealed class InvoiceCreator
     public async Task Create(CreateInvoiceCommand command)
     {
         var invoice = command.Adapt<Invoice>();
+        
+        invoice.CalculateTotals();
 
         await _repository.Save(invoice);
     }
