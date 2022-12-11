@@ -2,7 +2,7 @@
 
 namespace Dew.Invoices.Application.Create;
 
-public sealed class CreateInvoiceCommandHandler : CommandHandler<CreateInvoiceCommand>
+public sealed class CreateInvoiceCommandHandler : ICommandHandler<CreateInvoiceCommand, string>
 {
     private readonly InvoiceCreator _creator;
 
@@ -11,6 +11,6 @@ public sealed class CreateInvoiceCommandHandler : CommandHandler<CreateInvoiceCo
         _creator = creator;
     }
 
-    protected override async Task Handle(CreateInvoiceCommand request, CancellationToken cancellationToken) =>
+    public async Task<string> Handle(CreateInvoiceCommand request, CancellationToken cancellationToken) =>
         await _creator.Create(request);
 }

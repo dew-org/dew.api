@@ -6,7 +6,7 @@ namespace Invoices.Test.Application.Create;
 
 public class CreateInvoiceCommandHandlerTest
 {
-    private readonly IRequestHandler<CreateInvoiceCommand, Unit> _handler;
+    private readonly IRequestHandler<CreateInvoiceCommand, string> _handler;
     private Invoice? _invoice;
 
     public CreateInvoiceCommandHandlerTest()

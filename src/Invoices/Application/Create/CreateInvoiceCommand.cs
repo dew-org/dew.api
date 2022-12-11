@@ -7,7 +7,7 @@ public sealed record CreateInvoiceCommand(
     string Currency,
     string UserId,
     IEnumerable<CreateInvoiceItem> Items
-) : Command;
+) : Command<string>;
 
 public sealed record CreateInvoiceCustomer(string Id, string FullName);
 

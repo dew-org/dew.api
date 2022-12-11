@@ -11,12 +11,13 @@ public sealed class InvoiceCreator
         _repository = repository;
     }
 
-    public async Task Create(CreateInvoiceCommand command)
+    public async Task<string> Create(CreateInvoiceCommand command)
     {
         var invoice = command.Adapt<Invoice>();
-        
         invoice.CalculateTotals();
 
         await _repository.Save(invoice);
+
+        return invoice.Id.ToString();
     }
 }
