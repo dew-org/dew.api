@@ -8,18 +8,24 @@ public static class InvoiceMother
 {
     public static Invoice Random()
     {
+        var productFaker = new Faker<Product>()
+            .RuleFor(x => x.Code, f => f.Commerce.Product())
+            .RuleFor(x => x.Name, f => f.Commerce.ProductName());
+
         var itemFaker = new Faker<InvoiceItem>()
-            .RuleFor(x => x.Product.Code, f => f.Commerce.Product())
-            .RuleFor(x => x.Product.Name, f => f.Commerce.ProductName())
+            .RuleFor(x => x.Product, _ => productFaker.Generate())
             .RuleFor(x => x.Quantity, f => f.Random.Int(1, 10))
             .RuleFor(x => x.Price, f => f.Random.Decimal(1, 1000))
             .RuleFor(x => x.Tax, f => f.Random.Decimal())
             .RuleFor(x => x.Discount, f => f.Random.Decimal());
 
+        var customerFaker = new Faker<Customer>()
+            .RuleFor(x => x.Id, f => f.Random.AlphaNumeric(10))
+            .RuleFor(x => x.FullName, f => f.Person.FullName);
+
         var faker = new Faker<Invoice>()
             .CustomInstantiator(_ => new Invoice())
-            .RuleFor(x => x.Customer.Id, f => f.Random.AlphaNumeric(10))
-            .RuleFor(x => x.Customer.FullName, f => f.Person.FullName)
+            .RuleFor(x => x.Customer, _ => customerFaker.Generate())
             .RuleFor(x => x.Currency, f => f.Finance.Currency().Code)
             .RuleFor(x => x.UserId, f => f.Random.AlphaNumeric(10))
             .RuleFor(x => x.Items, f => f.Make(5, () => itemFaker.Generate()));
