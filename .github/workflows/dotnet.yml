@@ -1,0 +1,30 @@
+﻿name: ci
+
+on:
+  push:
+    branches: [ "main", "develop", "feat/**", "fix/**", "refactor/**" ]
+  pull_request:
+    branches: [ "main", "develop", "feat/**", "fix/**", "refactor/**" ]
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.0.x
+
+      - name: restore dependencies
+        run: dotnet restore
+
+      - name: build solution
+        run: dotnet build --no-restore
+
+      - name: test solution
+        run: dotnet test --no-build --verbosity normal
